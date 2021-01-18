@@ -71,6 +71,17 @@ NODE* FindAnElementInBinaryTree(TREE root, int key){
 
 }
 
+void FindNodeLeftOfNodeRight(TREE& X, TREE& Y) {
+	if (Y->pLeft != NULL){
+		FindNodeLeftOfNodeRight(X, Y->pLeft);
+	}
+	else {
+		X->data = Y->data;
+		X = Y;
+		Y = Y->pRight;
+	}
+}
+
 void DeleteNodeInBinaryTree(TREE &root, int data) {
 	if (root == NULL){
 		return; 
@@ -85,6 +96,8 @@ void DeleteNodeInBinaryTree(TREE &root, int data) {
 				root = root->pRight;
 			}else if (root->pRight == NULL){
 				root = root->pLeft;
+			}else {
+				FindNodeLeftOfNodeRight(x, root->pRight);
 			}
 			delete x; 
 		}
@@ -101,7 +114,7 @@ void Menu(TREE &root){
 		cout << "\n3.duyet cay theo LNR";
 		cout << "\n4.duyet cay theo LRN";
 		cout << "\n5.Tim kiem 1 phan tu trong cay";
-		cout << "\n6.Xoa node la hoac node bac 1 trong cay";
+		cout << "\n6.Xoa node la hoac node bac 1 hoac node bac 2 trong cay";
 		cout << "\n0. Thoat";
 		cout << "\n\n\t\t================";
 
